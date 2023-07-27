@@ -1,14 +1,17 @@
 """ Proyecto de tener una Agenda de  usuarios"""
 
 import json
-import archivo
 import os
-#import sus archivos donde esta la funcion de alta, busqueda
+
+import archivo
+from  Consultar_numero_Contactos import  Consultar_numero_contactos, consultar_n_contactos
+import alta_dato
+
 
 class Schedule:
-    def __init__(self,id,name,last_name,phone, email,street,number_out,
-                 number_in,colony, municipio,city,state,country) -> None:
-        self.id = id 
+    
+    def __init__(self, name, last_name, phone, email, street, number_out,
+                  number_in, colony, municipio, city, state, country)->None:
         self.name = name
         self.last_name = last_name
         self.phone = phone
@@ -25,8 +28,7 @@ class Schedule:
 
     def as_dict_schedule(self):
         return {
-                "id" : id, 
-        --      "name": self.name , 
+                "name": self.name , 
                 "last_name": self.last_name,
                 "phone": self.phone,  
                 "email": self.email,  
@@ -42,7 +44,7 @@ class Schedule:
              
           
     def save(self,file_name):
-        content=self.as_dict()
+        content=self.as_dict_schedule()
         #print(content)
         
         if not os.path.exists(file_name): 
@@ -58,7 +60,7 @@ class Schedule:
         agenda=archivo.read_file(file_name)
         for u in  agenda:
             users=Schedule(**u)
-            print("id:", agenda.id, 
+            print( 
         --      "name:", agenda.name , 
                 "last_name:", agenda.last_name,
                 "phone: ", agenda.phone,  
@@ -75,16 +77,41 @@ class Schedule:
 #Menu Principal
 
 print("\t\t......Sistema Control de Agenda...........")
-continua = "1" 
-while continua in ["1","2"]:
+opcion = "1" 
+while opcion in ["1","2"]:
     print("Escoge una Opcion:")
     print("1) Dar De Alta una Direccion.")
-    print("2) Concultar un Nombre")           
+    print("2) Concultar Contacto")
+    print("3) Consultar Número Total de Contactos")
+    print("4) Eliminar contacto")
+    print("5) Lista Completa de Contactos")
+               
     opcion=input("Opción: ")
-    
-if opcion == "1" :
-    addrees== alta_dato()
-    addrees.save("schedule.json")
+    if opcion == "1" :
+        address = alta_dato.datos()
+        schedule=Schedule(address[0],
+                         address[1],
+                         address[2],
+                         address[3],
+                         address[4],
+                         address[5],
+                         address[6],
+                         address[7],
+                         address[8],
+                         address[9],
+                         address[10],
+                         address[11])
+                         
+        schedule.save("schedule.json") 
+    elif opcion == 2:
+        print()
+    elif opcion == 3:
+        Consultar_numero_contactos()
+        print()
+    elif opcion == 4:
+        print()
+    elif opcion == 5: 
+         consultar_n_contactos()               
 
 #user1 = User("Guadalupe","Llamas","lupitallamas","nolose","lupitallt@hotmail.com") 
 #user1.save("users.json")
