@@ -4,14 +4,15 @@ import json
 import os
 
 import archivo
-from  Consultar_numero_Contactos import  Consultar_numero_contactos, consultar_n_contactos
+import Consultar_numero_Contactos 
 import alta_dato
 
 
 class Schedule:
     
-    def __init__(self, name, last_name, phone, email, street, number_out,
+    def __init__(self, id_agenda, name, last_name, phone, email, street, number_out,
                   number_in, colony, municipio, city, state, country)->None:
+        self.id_agenda = id_agenda
         self.name = name
         self.last_name = last_name
         self.phone = phone
@@ -28,7 +29,8 @@ class Schedule:
 
     def as_dict_schedule(self):
         return {
-                "name": self.name , 
+                "id_agenda": self.id_agenda,
+                "name": self.name, 
                 "last_name": self.last_name,
                 "phone": self.phone,  
                 "email": self.email,  
@@ -57,28 +59,31 @@ class Schedule:
                                
     def get_all_agenda(self,file_name):
         """Listar  personas en la agendan de agenda.json"""
-        print("entre")
-        file_name= schedule.json
-        agenda=archivo.read_file(file_name)
-        for u in  agenda:
-            agenda=Schedule(**u)
-            print( 
-        --      "name:", agenda.name, 
-                "Apellido: ", agenda.last_name,
-                "telefono: ", agenda.phone,  
-                "email: ", agenda.email,  
-                "calle: ", agenda.street, 
-                "number exterior: ", agenda.number_out, 
-                "numbero interior: ",agenda.number_in, 
-                "colonia: ", agenda.colony, 
-                "municipio: ", agenda.municipio, 
-                "ciudad: ",agenda.city,
-                "estado: ", agenda.state,  
-                "country: ", agenda.country)
+        
+        if not os.path.exists(file_name):
+            print(f"\n \n ...No existe el archivo:{file_name}")     
+        else:    
+            agenda=archivo.read_file(file_name)
+            print(agenda)
+            for i in  agenda:
+                agenda=Schedule(**i)
+                print("\n id: ", agenda.id_agenda,
+                      "\n name:", agenda.name, 
+                      "   Apellido: ", agenda.last_name,
+                      "\n telefono: ", agenda.phone,  
+                      "   email: ", agenda.email,  
+                      "\n calle: ", agenda.street, 
+                      " number exterior: ", agenda.number_out, 
+                      "-numbero interior: ",agenda.number_in, 
+                      "\n colonia: ", agenda.colony, 
+                      "\n ciudad: ",agenda.city,
+                      " municipio: ", agenda.municipio,
+                      " estado: ", agenda.state,  
+                      "\n country: ", agenda.country,"\n")
+            
             
 #Menu Principal
-
-print("\t\t......Sistema Control de Agenda...........")
+file_name = "schedule.json"
 opcion = "1" 
 while opcion in ["1","2","3","4","5"]:
     print("Escoge una Opcion:")
@@ -102,21 +107,17 @@ while opcion in ["1","2","3","4","5"]:
                          address[8],
                          address[9],
                          address[10],
-                         address[11])                  
-        schedule.save("schedule.json")
+                         address[11],
+                         address[12])                  
+        schedule.save(file_name)
     elif opcion == "2":
-        file_name= "schedule.joson"
         alta_dato.serch_name(file_name)
         print()   
     elif opcion == "3":
-        print("estoy en la opcion 3")
-        content=archivo.read_file("schedule.json")
-        Consultar_numero_contactos(content) 
+        content=archivo.read_file(file_name)
+        Consultar_numero_Contactos.Consultar_numero_contactos(content) 
     elif opcion == "4":
         print()
     elif opcion == "5": 
-        print("hola")
-        get_all_agenda("schedule.json")             
+         Schedule.get_all_agenda(Schedule,file_name)             
 
-#user1 = User("Guadalupe","Llamas","lupitallamas","nolose","lupitallt@hotmail.com") 
-#user1.save("users.json")
