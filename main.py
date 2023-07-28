@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 """ Proyecto de tener una Agenda de  usuarios"""
 
 import json
@@ -121,6 +120,4 @@ while opcion in ["1","2","3","4","5"]:
     elif opcion == "4":
         print()
     elif opcion == "5": 
-         Schedule.get_all_agenda(Schedule,file_name)             
-
->>>>>>> miren
+         Schedule.get_all_agenda(Schedule,file_name)         
