@@ -58,11 +58,12 @@ class Schedule:
     def get_all_agenda(self,file_name):
         """Listar  personas en la agendan de agenda.json"""
         print("entre")
+        file_name= schedule.json
         agenda=archivo.read_file(file_name)
         for u in  agenda:
             agenda=Schedule(**u)
             print( 
-        --      "Nombre:", agenda.name , 
+        --      "name:", agenda.name, 
                 "Apellido: ", agenda.last_name,
                 "telefono: ", agenda.phone,  
                 "email: ", agenda.email,  
@@ -102,16 +103,18 @@ while opcion in ["1","2","3","4","5"]:
                          address[9],
                          address[10],
                          address[11])                  
-        schedule.save("schedule.json") 
-    elif opcion == 2:
+        schedule.save("schedule.json")
+    elif opcion == "2":
+        file_name= "schedule.joson"
+        alta_dato.serch_name(file_name)
         print()   
-    elif opcion == 3:
+    elif opcion == "3":
         print("estoy en la opcion 3")
         content=archivo.read_file("schedule.json")
         Consultar_numero_contactos(content) 
-    elif opcion == 4:
+    elif opcion == "4":
         print()
-    elif opcion == 5: 
+    elif opcion == "5": 
         print("hola")
         get_all_agenda("schedule.json")             
 

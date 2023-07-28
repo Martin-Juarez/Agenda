@@ -1,5 +1,5 @@
 """Pedir los datos"""
-
+import archivo
 def datos():
 
     print('\n\n\n\t\t\t ------Datos------ ')
@@ -27,3 +27,12 @@ def datos():
     #print(type(address))
     #print (address)
     return address
+
+def serch_name(file_name):
+    content= archivo.read_file(file_name)
+    id_consultar= input("Ingrese el  id  del contacto que desea consultar: ")
+    contacto = file_name.get(id_consultar)
+    if contacto:
+        print(json.dumps(contacto))
+    else:
+        print("Contacto no encontrado.")

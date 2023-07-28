@@ -68,7 +68,7 @@ def read_file(file_name)->str:
     #                         la forma de abrir el arch por defal es read
     if not os.path.exists(file_name):
         raise FileNotFoundError(f'File {file_name} was not found')
-   
+    print(file_name)
     file = open(file_name)
     content = json.loads(file.read())
     file.close()
