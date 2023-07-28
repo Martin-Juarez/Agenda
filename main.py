@@ -57,31 +57,32 @@ class Schedule:
                                
     def get_all_agenda(self,file_name):
         """Listar  personas en la agendan de agenda.json"""
+        print("entre")
         agenda=archivo.read_file(file_name)
         for u in  agenda:
-            users=Schedule(**u)
+            agenda=Schedule(**u)
             print( 
-        --      "name:", agenda.name , 
-                "last_name:", agenda.last_name,
-                "phone: ", agenda.phone,  
-                "email:", agenda.email,  
-                "street:", agenda.street, 
-                "number_out:", agenda.number_out, 
-                "number_in:",agenda.number_in, 
-                "colony:", agenda.colony, 
-                "municipio:", agenda.municipio, 
-                "city:",agenda.city,
-                "state:", agenda.state,  
-                "country:", agenda.country)
+        --      "Nombre:", agenda.name , 
+                "Apellido: ", agenda.last_name,
+                "telefono: ", agenda.phone,  
+                "email: ", agenda.email,  
+                "calle: ", agenda.street, 
+                "number exterior: ", agenda.number_out, 
+                "numbero interior: ",agenda.number_in, 
+                "colonia: ", agenda.colony, 
+                "municipio: ", agenda.municipio, 
+                "ciudad: ",agenda.city,
+                "estado: ", agenda.state,  
+                "country: ", agenda.country)
             
 #Menu Principal
 
 print("\t\t......Sistema Control de Agenda...........")
 opcion = "1" 
-while opcion in ["1","2"]:
+while opcion in ["1","2","3","4","5"]:
     print("Escoge una Opcion:")
     print("1) Dar De Alta una Direccion.")
-    print("2) Concultar Contacto")
+    print("2) Consultar Contacto")
     print("3) Consultar Número Total de Contactos")
     print("4) Eliminar contacto")
     print("5) Lista Completa de Contactos")
@@ -100,18 +101,19 @@ while opcion in ["1","2"]:
                          address[8],
                          address[9],
                          address[10],
-                         address[11])
-                         
+                         address[11])                  
         schedule.save("schedule.json") 
     elif opcion == 2:
-        print()
+        print()   
     elif opcion == 3:
-        Consultar_numero_contactos()
-        print()
+        print("estoy en la opcion 3")
+        content=archivo.read_file("schedule.json")
+        Consultar_numero_contactos(content) 
     elif opcion == 4:
         print()
     elif opcion == 5: 
-         consultar_n_contactos()               
+        print("hola")
+        get_all_agenda("schedule.json")             
 
 #user1 = User("Guadalupe","Llamas","lupitallamas","nolose","lupitallt@hotmail.com") 
 #user1.save("users.json")

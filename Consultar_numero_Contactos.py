@@ -1,6 +1,8 @@
 #Consultar numero total de contactos
 import json
+import archivo
 def Consultar_numero_contactos(contactos):
+   
     print(f"\n El numero total de contactos es: {len(contactos)}")
 
 
